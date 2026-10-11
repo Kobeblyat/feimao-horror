@@ -1,0 +1,3 @@
+*.zip
+.freebuff/
+node_modules/

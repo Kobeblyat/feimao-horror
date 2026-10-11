@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>暮色伴侶動物安養所 - Twilight Companion Sanctuary (1998)</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=M+PLUS+Rounded+1c:wght@400;700;900&family=Noto+Serif+JP:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/horror.css" />
+</head>
+<body>
+  <!-- Ambient Audio Source Layers -->
+  <div id="audioSourcesContainer" style="display:none;"></div>
+
+  <!-- Feimao Stalker Background Shadow Layer -->
+  <div class="feimao-stalker-layer" id="feimaoStalker">
+    <img src="assets/fatcat_transparent.png" alt="Dusk Entity Stalker" />
+  </div>
+
+  <!-- Giant Nightmare Feimao Entity for Sanity=0 Collapse -->
+  <div class="giant-nightmare-feimao" id="giantNightmareFeimao">
+    <img src="assets/fatcat_transparent.png" alt="Nightmare Manifestation" />
+  </div>
+
+  <!-- Blood Vignette & Screen Tears -->
+  <div class="blood-drip-layer"></div>
+  <div class="san-zero-blood-border"></div>
+
+  <!-- Jumpscare Modal Overlay -->
+  <div class="jumpscare-modal" id="jumpscareModal">
+    <div class="jumpscare-img-box">
+      <img src="assets/jumpscare_feimao.jpg" class="jumpscare-img" alt="Jumpscare" />
+      <div class="jumpscare-caption" id="jumpscareCaption">肥 猫 降 臨</div>
+    </div>
+  </div>
+
+  <!-- Top Urgent Broadcast Ticker -->
+  <div id="siteWrapper">
+  <div class="top-ticker-bar">
+    <div class="ticker-content">
+      <span class="ticker-item"><span class="ticker-tag" data-i18n="ticker01Tag">所内通知</span><span data-i18n="ticker01Text">【1999年度】秋季伴侶動物健康診断・終末期ケアおよび終生譲渡の受付（暮岳村本部）</span></span>
+      <span class="ticker-item"><span class="ticker-tag" data-i18n="ticker02Tag">来所案内</span><span data-i18n="ticker02Text">当施設は深山に位置するため日没前の到着を推奨します。黄昏時、一部の個体が西の空を見つめる現象が確認されています</span></span>
+      <span class="ticker-item"><span class="ticker-tag" data-i18n="ticker03Tag">譲渡規約</span><span data-i18n="ticker03Text">当所は終生安養制を採用しております。夜間に直射光のない環境を用意でき、無心拍の伴侶を受け入れ可能な方に限ります</span></span>
+      <span class="ticker-item"><span class="ticker-tag" data-i18n="ticker04Tag">神藤院長</span><span data-i18n="ticker04Text">「生命の形はひとつではない。迷えるすべての魂に、永遠の帰宿を。」</span></span>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="logo-area">
+        <div class="logo-symbol">
+          <img src="assets/fatcat.png" alt="Logo" />
+        </div>
+        <div class="logo-texts">
+          <h1 data-i18n="siteTitle">暮色伴侶動物安养所</h1>
+          <span class="logo-sub" data-i18n="siteSub">TWILIGHT COMPANION SANCTUARY &amp; RESCUE (1998)</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#adoption" class="nav-link" data-i18n="navAdoption">🐾 里親募集アーカイブ <span class="nav-badge">12</span></a></li>
+          <li><a href="#cctv" class="nav-link" data-i18n="navCctv">📹 24H生中継監視網</a></li>
+          <li><a href="#questionnaire" class="nav-link" data-i18n="navQuiz">📝 適性診断テスト</a></li>
+          <li><a href="#spectrum-deck" class="nav-link" data-i18n="navSpectrum">📼 テープ音声解析機</a></li>
+          <li><a href="#memorial" class="nav-link" data-i18n="navMemorial">🕯 永劫安魂堂</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Language Switcher Button -->
+        <button class="btn-lang-toggle" id="btnLangToggle" title="言語切替 / 切换语言">
+          🌐 <span>日本語</span>
+        </button>
+
+        <button class="btn-search-trigger" id="btnSearchTrigger" title="アーカイブ検索">
+          🔍 <span data-i18n="searchPlaceholder">検索...</span>
+        </button>
+
+        <div class="sanity-meter-pill" title="精神理智値 (Sanity)">
+          <div class="sanity-dot" id="sanityDot"></div>
+          <span id="sanityValue">SAN: 100%</span>
+        </div>
+
+        <button class="btn-audio-toggle playing" id="btnAudioToggle" title="環境音 (ON)">
+          🔊
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-section" id="home">
+    <div class="hero-media-wrapper">
+      <img src="assets/clinic_hero.jpg" alt="暮色安养院全景" class="hero-bg-img" />
+      
+      <!-- Subtle Floating Feimao Silhouette in Twilight Sky -->
+      <div class="hero-feimao-shadow">
+        <img src="assets/fatcat_transparent.png" alt="Dusk Entity" />
+      </div>
+
+      <div class="hero-overlay">
+        <div class="container">
+          <div class="hero-text-card">
+            <span class="hero-tagline" data-i18n="heroTagline">夕陽が沈むとき、すべての魂はひとつになる</span>
+            <h2 class="hero-heading" data-i18n="heroHeading">迷えるすべての魂へ、<br>決して色褪せぬ永遠の安らぎを。</h2>
+            <p class="hero-desc" data-i18n="heroDesc">
+              群馬県暮岳村の静謐なる山深くに佇む。1998年の創立以来、傷つき、異常行動を示し、あるいは終末期を迎えた伴侶動物たちの終生保護と形態再構築に尽力してまいりました。ここでは、飢えも死の苦しみも存在しません。
+            </p>
+            <div class="hero-buttons">
+              <a href="#adoption" class="btn-primary" data-i18n="heroBtnAdoption">🐾 譲渡対象個体を閲覧</a>
+              <a href="#cctv" class="btn-secondary" data-i18n="heroBtnCctv">📹 リアルタイム監視網へ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 01: 领养档案库 (Adoption Catalog) -->
+  <section class="section" id="adoption">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-sub" data-i18n="adoptionSectionSub">ADOPTION &amp; RESCUE DOSSIERS</span>
+        <h2 class="section-title" data-i18n="adoptionSectionTitle">特殊伴侶個体・譲渡カルテ一覧</h2>
+        <p class="section-intro" data-i18n="adoptionSectionIntro">
+          以下は当施設で保護・観察されている特異個体です。【詳細カルテを閲覧】をクリックすると、神藤院長直筆の生理記録と異変報告書を照会できます。
+        </p>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-category="all" data-i18n="filterAll">全個体 (12)</button>
+        <button class="filter-tab" data-category="cat" data-i18n="filterCat">猫科サンプル (Cat)</button>
+        <button class="filter-tab" data-category="dog" data-i18n="filterDog">犬類サンプル (Canine)</button>
+        <button class="filter-tab" data-category="special" data-i18n="filterSpecial">特異奉納実体 (Specimen-00)</button>
+      </div>
+
+      <!-- Pet Cards Grid -->
+      <div class="pet-grid" id="petGrid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 02: 24H 实时监控中心 (Live CCTV Hub) -->
+  <section class="section alt-bg" id="cctv">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-sub" data-i18n="cctvSectionSub">24-HOUR SURVEILLANCE MATRIX</span>
+        <h2 class="section-title" data-i18n="cctvSectionTitle">収容施設リアルタイム監視マトリクス</h2>
+        <p class="section-intro" data-i18n="cctvSectionIntro">
+          全天候型6系統閉回路監視システム。微光暗視および赤外線熱画像に対応。画面内の異常な影や浮遊物体をクリックして記録してください。
+        </p>
+      </div>
+
+      <div class="section-locked-wrapper" id="cctvSectionWrapper">
+        <div class="section-lock-overlay" id="cctvLockOverlay">
+          <div class="section-lock-icon">🔒</div>
+          <div class="section-lock-title" data-i18n="cctvLockTitle">【閉回路監視網 // 警備システムオフライン】</div>
+          <div class="section-lock-desc" data-i18n="cctvLockDesc">現在、監視信号は夜間巡回専用回線に切り替えられています。【適性診断テスト】を完了するか、カルテを2件以上閲覧すると自動的に回線が復旧します。</div>
+          <button class="btn-unlock-override" id="btnUnlockCCTVOverride" data-i18n="cctvLockOverride">⚡ [ 警備室回線へ強制割込接続 ]</button>
+        </div>
+
+        <div class="cctv-console-wrapper">
+          <div class="cctv-top-bar">
+            <div class="cctv-status-indicator">
+              <span class="rec-blinker"></span>
+              <span id="cctvCurrentLabel">CH-01 [主犬舎 A棟 / KENNEL A]</span>
+            </div>
+            <div class="cctv-vision-modes">
+              <button class="btn-vision-mode active" data-mode="normal" data-i18n="cctvSignalNormal">通常回線 (RGB)</button>
+              <button class="btn-vision-mode" data-mode="nv" data-i18n="cctvSignalNV">微光暗視 (NV-G)</button>
+              <button class="btn-vision-mode" data-mode="thermal" data-i18n="cctvSignalThermal">赤外線熱画像 (IR)</button>
+            </div>
+          </div>
+
+          <div class="cctv-main-display">
+            <canvas id="cctvCanvas"></canvas>
+            <div class="cctv-hud-overlay">
+              <div class="cctv-hud-top">
+                <span>FPS: 29.97 | SIGNAL: NTSC</span>
+                <span>FEED: SECURE_LINK_1999</span>
+              </div>
+              <div class="cctv-hud-bottom">
+                <span>[画面内の怪しい影や浮遊実体をクリックして異常を記録]</span>
+                <span id="cctvCoords">TARGET: 104.38°E / 36.19°N</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cctv-channel-selector">
+            <button class="cctv-ch-btn active" data-channel="1">
+              <span class="cctv-ch-num">01</span>
+              <span class="cctv-ch-label" data-i18n="cctvCh1">主犬舎 A棟</span>
+            </button>
+            <button class="cctv-ch-btn" data-channel="2">
+              <span class="cctv-ch-num">02</span>
+              <span class="cctv-ch-label" data-i18n="cctvCh2">隔離104号室 ⚠️</span>
+            </button>
+            <button class="cctv-ch-btn" data-channel="3">
+              <span class="cctv-ch-num">03</span>
+              <span class="cctv-ch-label" data-i18n="cctvCh3">院長執務室</span>
+            </button>
+            <button class="cctv-ch-btn" data-channel="4">
+              <span class="cctv-ch-num">04</span>
+              <span class="cctv-ch-label" data-i18n="cctvCh4">黄昏放養庭園</span>
+            </button>
+            <button class="cctv-ch-btn" data-channel="5">
+              <span class="cctv-ch-num">05</span>
+              <span class="cctv-ch-label" data-i18n="cctvCh5">地下B2 焼却室 🔥</span>
+            </button>
+            <button class="cctv-ch-btn" data-channel="6">
+              <span class="cctv-ch-num">06</span>
+              <span class="cctv-ch-label" data-i18n="cctvCh6">地下B1 給食冷蔵庫</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 03: 在线领养资格心理测试 (Adoption Questionnaire) -->
+  <section class="section" id="questionnaire">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-sub" data-i18n="quizSectionSub">PSYCHOLOGICAL EVALUATION</span>
+        <h2 class="section-title" data-i18n="quizSectionTitle">里親適格審査および精神同調診断</h2>
+        <p class="section-intro" data-i18n="quizSectionIntro">
+          収容個体と里親の精神的安定性を担保するため、直感に従い選択してください。診断結果は譲渡契約の可否に直接影響します。
+        </p>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quizProgressFill"></div>
+        </div>
+
+        <div id="quizCardBody">
+          <div class="quiz-q-num" id="quizQNum">QUESTION 01 / 04</div>
+          <h3 class="quiz-question-title" id="quizTitle">設問を読み込み中...</h3>
+          <div class="quiz-options-list" id="quizOptionsList">
+            <!-- Options dynamically populated -->
+          </div>
+        </div>
+
+        <div class="quiz-result-box" id="quizResultBox"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 04: 声谱分析与磁带解密仪 (Spectrogram Analyzer) -->
+  <section class="section alt-bg" id="spectrum-deck">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-sub" data-i18n="spectrumSectionSub">AUDIO SPECTROGRAPH &amp; TAPE ARCHIVES</span>
+        <h2 class="section-title" data-i18n="spectrumSectionTitle">暮岳村異常音響スペクトログラム解析機</h2>
+        <p class="section-intro" data-i18n="spectrumSectionIntro">
+          1999年10月31日 午前03:33に録音されたカセットテープ音声。バンドパスフィルターのつまみを調整し、隠された暗号周波数を特定してください。
+        </p>
+      </div>
+
+      <div class="section-locked-wrapper" id="spectrumSectionWrapper">
+        <div class="section-lock-overlay" id="spectrumLockOverlay">
+          <div class="section-lock-icon">📻</div>
+          <div class="section-lock-title" data-i18n="spectrumLockTitle">【旧式周波数無線機 // 電源切断中】</div>
+          <div class="section-lock-desc" data-i18n="spectrumLockDesc">後山の1999年磁帯解析機は現在休眠状態です。CCTV監視網で異常信号を特定するか、第一の鍵を入手すると通電します。</div>
+          <button class="btn-unlock-override" id="btnUnlockSpectrumOverride" data-i18n="spectrumLockOverride">⚡ [ 予備電源ブレーカーを強制投入 ]</button>
+        </div>
+
+        <div class="spectrum-deck-card">
+          <div class="spectrum-tape-header">
+            <span class="tape-cassette-title" data-i18n="tapeTitle">📼 TAPE-99: [DUSK_RITUAL_AUDIO.DAT]</span>
+            <span style="font-family:var(--font-mono); color:#a89f99; font-size:0.8rem;">SAMPLING: 44.1kHz / 16-BIT STEREO</span>
+          </div>
+
+          <canvas id="spectrumCanvas" width="900" height="220"></canvas>
+
+          <div class="spectrum-controls">
+            <button class="deck-btn" id="btnPlayTape" data-i18n="playTapeBtn">▶ テープ #99 を再生</button>
+            
+            <div class="deck-slider-group">
+              <label for="freqSlider" data-i18n="freqLabel">周波数微調整:</label>
+              <input type="range" id="freqSlider" min="200" max="6000" step="50" value="1000" />
+              <span id="freqDisplay" style="color:var(--accent-warm); font-weight:bold; width:70px;">1000 Hz</span>
+            </div>
+
+            <button class="deck-btn" id="btnStartFeeding" style="background:#4a2d48; border-color:#824d74; margin-left:auto;" data-i18n="btnStartFeedingText">
+              🍖 夜間給食プロトコル模擬演習を起動
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 05: 往生安魂堂 & 纪念壁 (Memorial Wall) -->
+  <section class="section" id="memorial">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-sub" data-i18n="memorialSectionSub">MEMORIAL &amp; ETERNAL SANCTUARY</span>
+        <h2 class="section-title" data-i18n="memorialSectionTitle">永劫安魂堂・昇華記念壁</h2>
+        <p class="section-intro" data-i18n="memorialSectionIntro">
+          すでに「昇華」を遂げ肥猫の肉体へと還った伴侶たちへ、夕暮れの光を手向けます。灯火を灯し、彼岸の静謐な声をお聴きください。
+        </p>
+      </div>
+
+      <div class="section-locked-wrapper" id="memorialSectionWrapper">
+        <div class="section-lock-overlay" id="memorialLockOverlay">
+          <div class="section-lock-icon">🕯️</div>
+          <div class="section-lock-title" data-i18n="memorialLockTitle">【永劫安魂記念壁 // 看護員認証が必要】</div>
+          <div class="section-lock-desc" data-i18n="memorialLockDesc">往生名簿には1998〜1999年に昇華した全個体および失踪職員の記録が保管されています。周波数暗号を解読するか適性テストを完了すると公開されます。</div>
+          <button class="btn-unlock-override" id="btnUnlockMemorialOverride" data-i18n="memorialLockOverride">⚡ [ 秘匿名簿を閲覧 ]</button>
+        </div>
+
+        <div style="background:#241d20; border:1px solid #4a3a44; border-radius:var(--radius); padding:36px; text-align:center; color:#e0d2dc;">
+          <div style="font-size:3rem; margin-bottom:12px;">🕯️ 🐾 🕯️</div>
+          <h3 style="font-size:1.4rem; margin-bottom:10px; font-weight:700;" data-i18n="memorialHeading">「死は終焉にあらず、暮色の蒼穹へと還る旅立ち」</h3>
+          <p style="max-width:580px; margin:0 auto 20px; font-size:0.9rem; color:#b09fae; line-height:1.7;" data-i18n="memorialDesc">
+            当施設では1998年以来、計1,999回の非公開安魂儀式を執り行ってまいりました。以下は初期に形態再構築を完了した先駆者たちの碑銘です：
+          </p>
+          <button class="btn-primary" onclick="if(window.HorrorAudio){ window.HorrorAudio.playFeimaoPurr(); } if(window.Corruption){ window.Corruption.addCorruption(8, 'Lit a candle'); window.Corruption.showToast(window.I18N && window.I18N.currentLang === 'zh' ? '已点燃安魂烛火...听到了虚空中的猫咪呼噜声。' : '安魂の灯火を灯しました…虚空から猫の喉鳴らし音が響きます。'); }" style="background:#824d74;" data-i18n="lightCandleBtn">
+            🕯️ 永遠の安魂灯を灯す
+          </button>
+
+          <!-- 8 Expanded Memorial Tablets -->
+          <div class="memorial-tablets-grid">
+            <div class="memorial-tablet-card" onclick="if(window.Corruption){ window.Corruption.showToast(window.I18N && window.I18N.currentLang === 'zh' ? '【白雪】原主人留言：“它走的那天没有痛苦，只是身体变得像羽毛一样轻，飘出了窗外。”' : '【白雪】飼い主の手記：「あの子は苦しまず、羽のように軽くなって窓の外へと飛んでいきました。」'); }">
+              <span class="tablet-year-badge">1996 · 往生 01</span>
+              <div class="tablet-name">白雪 (Snowy) · ペルシャ猫</div>
+              <div class="tablet-epitaph">「呼吸が止まって三日後も、廊下に濡れた肉球の足跡を残し続けた。」</div>
+            </div>
+
+            <div class="memorial-tablet-card" onclick="if(window.Corruption){ window.Corruption.showToast(window.I18N && window.I18N.currentLang === 'zh' ? '【忠吉】保卫科档案：“院门生锈后，忠吉的黑色犬牙化作了门轴的卡榫。”' : '【忠吉】警備記録：「正門が錆び付いた後、忠吉の黒い犬歯が蝶番の閂となった。」'); }">
+              <span class="tablet-year-badge">1997 · 往生 02</span>
+              <div class="tablet-name">忠吉 (Chukichi) · 黒柴</div>
+              <div class="tablet-epitaph">「神藤院長の診察室前を守り続け、骨と牙が床板の蝶番と化した。」</div>
+            </div>
+
+            <div class="memorial-tablet-card" onclick="if(window.Corruption){ window.Corruption.showToast(window.I18N && window.I18N.currentLang === 'zh' ? '【小林看护员】遗书：“肥猫在叫我的名字。我不需要氧气了。”' : '【小林看護長】遺書：「肥猫が私を呼んでいる。もう酸素は必要ない。」'); }">
+              <span class="tablet-year-badge">1998 · 職員 01</span>
+              <div class="tablet-name">看護長・小林 (Nurse Kobayashi)</div>
+              <div class="tablet-epitaph">「自ら非人形態への再構築を望んだ最初の医療員。職員ID: ST-001。」</div>
+            </div>
+
+            <div class="memorial-tablet-card" onclick="if(window.Corruption){ window.Corruption.showToast(window.I18N && window.I18N.currentLang === 'zh' ? '【玛丽】解剖备忘：“其体内所有内脏已被干燥温暖的猫毛所取代。”' : '【マリー】解剖メモ：「内臓はすべて乾燥し温かい猫毛に置換されていた。」'); }">
+              <span class="tablet-year-badge">1998 · 往生 03</span>
+              <div class="tablet-name">マリー (Mary) · ポメラニアン</div>
+              <div class="tablet-epitaph">「黄昏時に全身が白毛球へと羽化し、暮岳山の夕雲へと昇華した。」</div>
+            </div>
+
+            <div class="memorial-tablet-card" onclick="if(window.Corruption){ window.Corruption.showToast(window.I18N && window.I18N.currentLang === 'zh' ? '【太郎】农协移交记录：“从后山挖出的流浪秋田犬，胃里满是1999年的十元硬币。”' : '【太郎】移送記録：「後山で発見。胃の中に1999枚の十円硬貨が充填されていた。」'); }">
+              <span class="tablet-year-badge">1999 · 往生 04</span>
+              <div class="tablet-name">太郎 (Taro) · 秋田犬</div>
+              <div class="tablet-epitaph">「夕暮れの引力に吸い込まれぬよう、銅貨を呑み込んで肉体を重く沈めた。」</div>
+            </div>
+
+            <div class="memorial-tablet-card" onclick="if(window.Corruption){ window.Corruption.showToast(window.I18N && window.I18N.currentLang === 'zh' ? '【佐藤技师】B2录音：“焚化炉里烧出的根本不是骨灰，是会蠕动的黑烟！”' : '【佐藤技師】B2録音：「焼却炉から出たのは骨灰ではない、蠢く黒煙だ！」'); }">
+              <span class="tablet-year-badge">1999 · 職員 02</span>
+              <div class="tablet-name">焼却技師・佐藤 (Operator Sato)</div>
+              <div class="tablet-epitaph">「1999年10月31日午前03:33、高温の焼却炉内へ歩み入り内側から施錠。」</div>
+            </div>
+
+            <div class="memorial-tablet-card" onclick="if(window.Corruption){ window.Corruption.showToast(window.I18N && window.I18N.currentLang === 'zh' ? '【九号幽灵】观测报告：“它没有实体，只有投射在墙上的无头黑猫阴影。”' : '【九号実体】観測報告：「実体はなく、壁面に無頭の黒猫の影のみを投射する。」'); }">
+              <span class="tablet-year-badge">1999 · 往生 05</span>
+              <div class="tablet-name">名無しの九号実体</div>
+              <div class="tablet-epitaph">「施設内14枚の窓ガラスに同時に倒影を現し、視線は104号室を指す。」</div>
+            </div>
+
+            <div class="memorial-tablet-card" onclick="if(window.Corruption){ window.Corruption.showToast(window.I18N && window.I18N.currentLang === 'zh' ? '【神藤小百合】院长日记：“小百合没有死，她成了肥猫的眼睛。她在看着我们所有人。”' : '【神藤小百合】院長手記：「小百合は死んでいない。肥猫の瞳となって私たちを見つめている。」'); }">
+              <span class="tablet-year-badge">1998 · 核心 00</span>
+              <div class="tablet-name">神藤小百合 (Sayuri Shindo)</div>
+              <div class="tablet-epitaph">「院長の一人娘。暮色同化祭典における原初の源質であり契約の証人。」</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 data-i18n="footerOrgName">暮色伴侶動物安養所</h4>
+          <p data-i18n="footerOrgDesc">
+            トワイライト・コンパニオン・サンクチュアリ<br>
+            設立許可：群馬県動保管第 1998-333 号<br>
+            理念：すべての形態異常および終末期動物に永遠の安らぎと昇華庇護を提供します。
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footerLinksTitle">案内リンク</h4>
+          <ul class="footer-links">
+            <li><a href="#adoption" data-i18n="navAdoption">里親募集アーカイブ</a></li>
+            <li><a href="#cctv" data-i18n="navCctv">24H生中継監視網</a></li>
+            <li><a href="#questionnaire" data-i18n="navQuiz">適性診断テスト</a></li>
+            <li><a href="#memorial" data-i18n="navMemorial">永劫安魂堂</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footerContactTitle">救護ホットライン</h4>
+          <div class="footer-contact-item">
+            <span>📞</span> <span data-i18n="footerPhone">027-333-XXXX (夜間専用回線)</span>
+          </div>
+          <div class="footer-contact-item">
+            <span>📍</span> <span data-i18n="footerAddress">群馬県暮岳村3-14-1 (深山終点)</span>
+          </div>
+          <div class="footer-contact-item">
+            <span>🕒</span> <span data-i18n="footerHours">黄昏受付 17:00 - 04:00</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footerDisclaimerTitle">免責事項および誓約</h4>
+          <p style="font-size:0.78rem; color:#857871;" data-i18n="footerDisclaimerText">
+            当サイトを閲覧した時点で『暮色精神同調免責規約』に同意したものとみなされます。閲覧中に生じた幻聴、視野異常、記憶混濁、および肥猫による凝視現象について、当所は一切の責任を負いかねます。
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span data-i18n="footerCopyright">© 1998-1999 Twilight Companion Sanctuary. All rights reserved.</span>
+        <a href="#" class="btn-secret-intranet" id="btnOpenIntranet" data-i18n="footerIntranetBtn">[ 職員専用イントラネット端末ログイン / INTRANET LOGIN ]</a>
+      </div>
+    </div>
+  </footer>
+  </div><!-- /#siteWrapper -->
+
+  <!-- ALL FULLSCREEN POPUPS (Directly under <body>) -->
+
+  <!-- Detail Dossier Modal -->
+  <div class="dossier-modal" id="dossierModal">
+    <div class="dossier-paper">
+      <div class="dossier-stamp-red">特 別 管 理</div>
+      <button id="btnDossierClose" style="position:absolute; top:20px; right:20px; font-size:1.5rem;">✕</button>
+      
+      <h2 id="dossierTitle" style="font-size:1.4rem; font-weight:700; border-bottom:2px solid #2b2320; padding-bottom:8px;">カルテを読み込み中...</h2>
+      
+      <div class="dossier-grid">
+        <div>
+          <div class="dossier-photo-frame">
+            <img id="dossierPhoto" src="assets/clinic_hero.jpg" alt="Dossier Photo" />
+          </div>
+          <p style="font-size:0.75rem; color:#888; margin-top:8px; text-align:center;">【添付：保護時現況写真】</p>
+        </div>
+        <div>
+          <table class="dossier-medical-table">
+            <tbody id="dossierTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="dossier-secret-note" id="dossierSecretNote"></div>
+    </div>
+  </div>
+
+  <!-- Search Modal -->
+  <div class="search-modal" id="searchModal">
+    <div class="search-box-card">
+      <div class="search-input-header">
+        <span style="margin-right:10px; font-size:1.2rem;">🔍</span>
+        <input type="text" id="searchInput" data-i18n="searchModalPlaceholder" placeholder="検索キーワードを入力（肥猫、104、神藤、肉塊、安楽死、1999 など）..." />
+        <button id="btnSearchClose" style="font-size:1.2rem; margin-left:10px;">✕</button>
+      </div>
+      <div class="search-results-list" id="searchResultsList">
+        <p style="color:#888; font-size:0.85rem;" data-i18n="searchModalHint">院内カルテ、監視カメラ番号、職員名簿を検索中...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Staff Intranet Terminal Modal -->
+  <div class="terminal-modal" id="terminalModal">
+    <div class="terminal-window">
+      <div class="terminal-title-bar">
+        <span>SANCTUARY INTRANET UNIX TERMINAL v3.3.1 (PORT 3333)</span>
+        <button id="btnTerminalClose" style="color:#33ff33; font-weight:bold;">[ ✕ 端末を閉じる ]</button>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-output" id="terminalOutput">
+================================================================================
+  TWILIGHT COMPANION SANCTUARY - INTERNAL MAINFRAME ARCHIVE (EST. 1998)
+  RESTRICTED ACCESS // ALL TERMINAL ACTIVITIES ARE LOGGED AND MONITORED
+================================================================================
+院内端末へようこそ。現在のセッション：GUEST。
+'help' で使用可能コマンドを表示。'login <ユーザー名> <パスワード>' で権限昇格。
+        </div>
+        <div class="terminal-prompt-row">
+          <span class="terminal-prompt-sym">></span>
+          <input type="text" class="terminal-input" id="terminalInput" autofocus spellcheck="false" autocomplete="off" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Night Feeding Protocol Modal Minigame -->
+  <div class="feeding-game-modal" id="feedingModal">
+    <div class="feeding-chamber-box">
+      <div class="feeding-header">
+        <span style="font-family:var(--font-mono); font-weight:bold; color:#ff9966;">⚠️ NIGHT FEEDING PROTOCOL // SPECIMEN-00</span>
+        <button id="btnFeedingClose" style="color:#fff; font-size:1.2rem;">✕</button>
+      </div>
+      <div class="feeding-viewport">
+        <div class="feeding-eye-gauge">
+          <span id="feedingTimer">残り時間: 40s</span> | 
+          <span id="feedingGazeMeter" style="color:#4ade80;">凝視危険度: 0%</span>
+        </div>
+        <div class="feeding-feimao-target" id="feedingFeimao">
+          <img src="assets/fatcat_transparent.png" alt="Feimao Target" />
+        </div>
+        <div id="feedingStatusText" style="position:absolute; bottom:15px; font-family:var(--font-mono); font-size:0.85rem; color:#ff9966;">
+          【規程：[鮮肉盤 -> 聖水鉢 -> 禁忌供物] の順に奉納せよ。直視厳禁】
+        </div>
+      </div>
+      <div class="feeding-action-bar">
+        <button class="btn-feed-dish" data-dish="meat">🥩 1. 特選生肉盤 (Meat)</button>
+        <button class="btn-feed-dish" data-dish="water">🥣 2. 純浄聖水鉢 (Water)</button>
+        <button class="btn-feed-dish" data-dish="tribute">🖤 3. 異化禁忌供物 (Tribute)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Endings Epilogue Modal -->
+  <div class="ending-modal" id="endingModal">
+    <div class="ending-card">
+      <div class="ending-code" id="endingCode">ENDING-D // TRUE DISCOVERY</div>
+      <h1 class="ending-title" id="endingTitle">【暮色破暁】</h1>
+      <p class="ending-narrative" id="endingNarrative">
+        朝焼けの光の中に肥猫の巨影は消滅した。すべての魂は解放され、あなたは果てしない黄昏の悪夢から生還した！
+      </p>
+      <button class="btn-restart" id="btnRestartGame" data-i18n="btnRestartText">初めから再探索 ➔</button>
+    </div>
+  </div>
+
+  <!-- Live Chat Widget (肥猫助手) -->
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-head" id="chatHead">
+        <span data-i18n="chatHeadTitle">🐾 暮色愛寵 24H 相談窓口 (小暮)</span>
+        <button id="btnCloseChat" style="color:#fff; font-size:1.1rem;">✕</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg bot" data-i18n="chatWelcomeMsg">
+          こんにちは！暮色伴侶動物安養所の自動窓口【小暮】です。<br>
+          【譲渡規約】、【104号病室】、【神藤院長】、【地下給食庫】や特定のペットについてご質問いただけます。下のボタンからも直接お尋ねいただけます。
+        </div>
+      </div>
+      <div class="chat-quick-chips" id="chatQuickChips">
+        <button class="chat-chip" data-query="譲渡規約と条件" data-i18n="chatChipAdoption">🐾 譲渡規約</button>
+        <button class="chat-chip" data-query="104号室の状況" data-i18n="chatChip104">🩺 104号室</button>
+        <button class="chat-chip" data-query="神藤院長について" data-i18n="chatChipDirector">👨‍⚕️ 神藤院長</button>
+        <button class="chat-chip" data-query="地下給食庫と冷凍肉" data-i18n="chatChipMeat">🥩 地下給食庫</button>
+        <button class="chat-chip" data-query="暮色の肥猫について" data-i18n="chatChipFeimao">🖤 暮色肥猫</button>
+        <button class="chat-chip" data-query="安養所から脱出する方法" data-i18n="chatChipEscape">🚪 施設から脱出</button>
+      </div>
+      <div class="chat-input-bar">
+        <input type="text" id="chatInput" data-i18n="chatInputPlaceholder" placeholder="ご相談内容を入力 (例: 譲渡、104、暗号)..." />
+        <button class="chat-send-btn" id="btnChatSend" data-i18n="chatSendBtn">送信</button>
+      </div>
+    </div>
+
+    <button class="chat-toggle-btn" id="btnToggleChat" title="オンライン相談窓口を開く">
+      💬
+      <span class="chat-unread-dot" id="chatUnreadDot"></span>
+    </button>
+  </div>
+
+  <!-- Core Scripts (i18n loaded first) -->
+  <script src="js/i18n.js"></script>
+  <script src="js/audio-engine.js"></script>
+  <script src="js/corruption.js"></script>
+  <script src="js/cctv-system.js"></script>
+  <script src="js/intranet-terminal.js"></script>
+  <script src="js/feeding-game.js"></script>
+  <script src="js/spectrum.js"></script>
+  <script src="js/chat-bot.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
